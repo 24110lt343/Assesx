@@ -226,7 +226,7 @@ export default function Dashboard() {
 
 
            
-                <div className="grid grid-cols-4 px-6 gap-4">
+                <div className="grid grid-cols-4 px-6">
 
                     <div className="group relative w-[320px] overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-900/20 hover:shadow-[0_20px_45px_-18px_rgba(0,0,0,0.18)]">
 
