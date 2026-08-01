@@ -64,6 +64,7 @@ const Subscriptions = lazy(()=>import("./_components/Subscriptions.jsx"));
 const BillingHistory = lazy(()=>import("./_components/BillingHistory.jsx"));
 const Usage = lazy(()=>import("./_components/Usage.jsx"));
 const SettingsScreen = lazy(()=>import("./_components/Settings.jsx"));
+import Loader from "./_components/Loading.jsx";
 
 
 export default function Dashboard() {
@@ -99,6 +100,7 @@ export default function Dashboard() {
             &nbsp;&nbsp;&nbsp; <span className="">Overview</span>{" "}
             &nbsp;&nbsp;&nbsp;
           </div>
+        
 
           <div className="flex items-center gap-3">
              
@@ -214,59 +216,59 @@ export default function Dashboard() {
           </div>
 
           {
-            visibleView == "overview"?<Suspense fallback={<p>Loading...</p>}><Overview/></Suspense>:null
+            visibleView == "overview"?<Suspense fallback={<Loader/>}><Overview/></Suspense>:null
           }
 
           {
-            visibleView == "recent-activity"?<Suspense fallback={<p>Loading...</p>}><RecentActivity/></Suspense>:null
+            visibleView == "recent-activity"?<Suspense fallback={<Loader/>}><RecentActivity/></Suspense>:null
           }
 
           {
-            visibleView == "quick-actions"?<Suspense fallback={<p>Loading...</p>}><QuickActions/></Suspense>:null
+            visibleView == "quick-actions"?<Suspense fallback={<Loader/>}><QuickActions/></Suspense>:null
           }
 
           {
-            visibleView == "workflow"?<Suspense fallback={<p>Loading...</p>}><Workflowx/></Suspense>:null
+            visibleView == "workflow"?<Suspense fallback={<Loader/>}><Workflowx/></Suspense>:null
           }
 
           {
-            visibleView == "template"?<Suspense fallback={<p>Loading...</p>}><Templates/></Suspense>:null
+            visibleView == "template"?<Suspense fallback={<Loader/>}><Templates/></Suspense>:null
           }
 
           {
-            visibleView == "published"?<Suspense fallback={<p>Loading...</p>}><Published/></Suspense>:null
+            visibleView == "published"?<Suspense fallback={<Loader/>}><Published/></Suspense>:null
           }
 
           {
-            visibleView == "team-management"?<Suspense fallback={<p>Loading...</p>}><TeamManagement/></Suspense>:null
+            visibleView == "team-management"?<Suspense fallback={<Loader/>}><TeamManagement/></Suspense>:null
           }
 
           {
-            visibleView == "components"?<Suspense fallback={<p>Loading...</p>}><Components/></Suspense>:null
+            visibleView == "components"?<Suspense fallback={<Loader/>}><Components/></Suspense>:null
           }
 
           {
-            visibleView == "saved-questions"?<Suspense fallback={<p>Loading...</p>}><SavedQuestions/></Suspense>:null
+            visibleView == "saved-questions"?<Suspense fallback={<Loader/>}><SavedQuestions/></Suspense>:null
           }
 
           {
-            visibleView == "coding-challenges"?<Suspense fallback={<p>Loading...</p>}><CodingChallenges/></Suspense>:null
+            visibleView == "coding-challenges"?<Suspense fallback={<Loader/>}><CodingChallenges/></Suspense>:null
           }
 
           {
-            visibleView == "subscriptions"?<Suspense fallback={<p>Loading...</p>}><Subscriptions/></Suspense>:null
+            visibleView == "subscriptions"?<Suspense fallback={<Loader/>}><Subscriptions/></Suspense>:null
           }
 
           {
-            visibleView == "billing-history"?<Suspense fallback={<p>Loading...</p>}><BillingHistory/></Suspense>:null
+            visibleView == "billing-history"?<Suspense fallback={<Loader/>}><BillingHistory/></Suspense>:null
           }
 
           {
-            visibleView == "usage"?<Suspense fallback={<p>Loading...</p>}><Usage/></Suspense>:null
+            visibleView == "usage"?<Suspense fallback={<Loader/>}><Usage/></Suspense>:null
           }
 
           {
-            visibleView == "settings"?<Suspense fallback={<p>Loading...</p>}><SettingsScreen/></Suspense>:null
+            visibleView == "settings"?<Suspense fallback={<Loader/>}><SettingsScreen/></Suspense>:null
           }
 
         </div>
