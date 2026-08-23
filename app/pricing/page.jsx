@@ -1,37 +1,111 @@
+"use client";
 import {
-  BadgeCheck,
-  Building2,
-  School,
-  Brain,
   ShieldCheck,
-  Sparkles,
-  Workflow,
-  GraduationCap,
-  ChevronDown,
-  Boxes,
-  Plus,
   Check,
-  TextInitial,
   MoveRight,
 } from "lucide-react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { StripedPattern } from "@/components/magicui/striped-pattern";
-import { Globe } from "@/components/ui/globe";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { NotebookText } from "lucide-react";
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import Header from "@/components/Header.jsx";
 import Footer from "@/components/Footer.jsx";
 
+const plans = [
+  {
+    badge: "STARTER",
+    badgeTone: "blue",
+    label: "Free Trial",
+    name: "Free Trial",
+    price: "₹0",
+    period: "/month",
+    desc: "Everything you need to start creating technical assessments and evaluate candidates for free.",
+    cta: "Start Free Trial",
+    features: [
+      "1 active evaluation workflow.",
+      "Up to 25 Participants.",
+      "Coding Assessments.",
+      "Live Coding Room.",
+      "System Design Room.",
+      "Data Collection Forms.",
+      "Basic Candidate Reports.",
+      "Question Library Access.",
+      "Email support",
+    ],
+  },
+  {
+    badge: "MOST POPULAR",
+    badgeTone: "indigo",
+    label: "Professional",
+    name: "Pro",
+    price: "₹2499",
+    period: "/month",
+    desc: "Everything you need to automate technical evaluations and collaborate with your team.",
+    cta: "Choose Plan",
+    features: [
+      "25 active evaluation workflow.",
+      "Up to 1000 Participants.",
+      "Advanced AI evaluations.",
+      "Advanced team management.",
+      "SSO authentication.",
+      "API & ATS integrations.",
+      "Custom branding.",
+      "Dedicated success manager.",
+      "24/7 priority support.",
+    ],
+  },
+  {
+    badge: "ENTERPRISE",
+    badgeTone: "slate",
+    label: "Industry Grade",
+    name: "Enterprise",
+    price: "₹9999",
+    period: "/month",
+    desc: "Everything you need to manage large-scale evaluations with enterprise-grade security.",
+    cta: "Contact Sales",
+    features: [
+      "Unlimited workflows.",
+      "Unlimited participants.",
+      "Unlimited AI evaluations.",
+      "Advanced team management.",
+      "Role-based access control.",
+      "SSO authentication.",
+      "API & ATS integrations.",
+      "Custom branding.",
+      "24/7 priority support.",
+    ],
+  },
+];
+
+const perks = [
+  {
+    icon: <ShieldCheck size={20} strokeWidth={1.5} />,
+    title: "Transparent Pricing",
+    desc: "No hidden charges—just clear, predictable pricing for every plan.",
+  },
+  {
+    icon: <ShieldCheck size={20} strokeWidth={1.5} />,
+    title: "Cancel Anytime",
+    desc: "Change or cancel your subscription whenever your needs evolve.",
+  },
+  {
+    icon: <ShieldCheck size={20} strokeWidth={1.5} />,
+    title: "Enterprise Security",
+    desc: "Your data is protected with trusted enterprise-grade security.",
+  },
+];
+
 export default function PricingPage() {
   return (
     <>
-    <Header/>
-      <div className="bg-[#f2f2f2]  bg-[radial-gradient(ellipse_0%_0%_at_50%_30%,rgba(0,74,224,0.12),transparent_70%),radial-gradient(rgba(0,74,224,0.18)_1.2px,transparent_1px)]  bg-size-[auto,22px_22px]  top-0  xl:px-48 items-center justify-between px-3.5 py-6  border-gray-200/60 border-b shadow-[5px] flex flex-col">
+      <Header />
+      <div className="min-h-screen bg-[radial-gradient(ellipse_0%_0%_at_50%_30%,rgba(0,74,224,0.12),transparent_70%),radial-gradient(rgba(0,74,224,0.18)_1.2px,transparent_1px)] bg-[#f2f2f2] bg-size-[auto,22px_22px]">
         
-          <div className="text-foreground flex flex-col  items-center justify-center p-8">
-            <h1 className="text-center text-4xl font-semibold tracking-tight md:text-5xl leading-15">
-              Simple, Transparent Pricing <br /> for every{" "}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16">
+          
+          {/* Hero */}
+          <div className="flex flex-col items-center justify-center text-center py-8 sm:py-10">
+            <h1 className="text-2xl sm:text-3xl md:text-[36px] font-semibold tracking-tight text-[#1e1f24] leading-[1.15] max-w-2xl">
+              Simple, Transparent Pricing <br className="hidden sm:block" /> for every{" "}
               <DiaTextReveal
                 repeat
                 repeatDelay={1.2}
@@ -45,420 +119,143 @@ export default function PricingPage() {
                 ]}
               />
             </h1>
-            <p className="text-center text-[19px] mt-5 leading-7">
+            <p className="text-sm sm:text-[15px] text-[#67676f] mt-4 leading-relaxed max-w-lg">
               Transparent pricing with powerful assessment tools, built to
               support teams at every stage of growth.
             </p>
           </div>
 
-           <div className="flex gap-5 justify-between">
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {plans.map((plan, i) => (
+              <div
+                key={i}
+                className={`rounded-2xl border border-neutral-200 bg-linear-to-b from-neutral-50 via-white to-neutral-100 p-2.5 shadow-sm ${
+                  plan.badge === "MOST POPULAR" ? "lg:-translate-y-2" : ""
+                }`}
+              >
+                <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <StripedPattern color="#d4d4d4" width={6} height={6} />
+                  <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-blue-500/15 blur-[90px]" />
 
-          
-
-            <div className="w-[33%] rounded-3xl border border-neutral-200 bg-linear-to-b from-neutral-50 via-white to-neutral-100 p-3 shadow-sm">
-                <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                    <StripedPattern color="#d4d4d4" width={6} height={6} />
-
-                    <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/15 blur-[90px]" />
-
-                    <div className="relative z-10 flex h-full flex-col p-8">
-
-                    {/* Badge */}
+                  <div className="relative z-10 flex h-full flex-col p-5 sm:p-6">
+                    
+                    {/* Badge Row */}
                     <div className="flex justify-between items-center">
-                        <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wider text-blue-700">
-                        STARTER
-                        </span>
-
-                        <span className="text-sm font-medium text-neutral-500">
-                        Free Trial
-                        </span>
+                      <span className={`rounded-full border px-3 py-0.5 text-[11px] font-semibold tracking-wider ${
+                        plan.badge === "MOST POPULAR"
+                          ? "border-indigo-200 bg-indigo-50 text-indigo-700"
+                          : plan.badgeTone === "blue"
+                          ? "border-blue-200 bg-blue-50 text-blue-700"
+                          : "border-slate-200 bg-slate-50 text-slate-700"
+                      }`}>
+                        {plan.badge}
+                      </span>
+                      <span className="text-[12px] font-medium text-neutral-500">
+                        {plan.label}
+                      </span>
                     </div>
 
-                    {/* Plan */}
-                    <div className="mt-8">
-                        <h2 className="text-4xl font-bold text-neutral-900">
-                        Free Trial
-                        </h2>
-
-                        <p className="mt-3 text-neutral-500 leading-7">
-                        Everything you need to start creating technical assessments and evaluate candidates for free.
-                        </p>
+                    {/* Plan Name */}
+                    <div className="mt-6">
+                      <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                        {plan.name}
+                      </h2>
+                      <p className="mt-2 text-[13px] text-neutral-500 leading-relaxed">
+                        {plan.desc}
+                      </p>
                     </div>
 
                     {/* Price */}
                     <div className="mt-5 flex items-end gap-2">
-                        <h1 className="text-6xl font-black tracking-tight">
-                        ₹0
-                        </h1>
-
-                        <span className="mb-2 text-neutral-500">
-                        /month
-                        </span>
+                      <span className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900">
+                        {plan.price}
+                      </span>
+                      <span className="mb-1 text-[12px] text-neutral-500">
+                        {plan.period}
+                      </span>
                     </div>
 
-                    <button className="mt-5 w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition hover:cursor-pointer hover:bg-blue-600">
-                        Start Free Trial
+                    <button className="mt-5 w-full rounded-lg bg-black py-2.5 text-[13px] font-semibold text-white transition hover:cursor-pointer hover:bg-blue-600">
+                      {plan.cta}
                     </button>
 
                     <div className="my-3 h-px bg-neutral-200" />
 
                     {/* Features */}
-
-                    <div className="space-y-5 flex-1">
-
-                        {[
-                        "1 active evaluation workflow.",
-                        "Up to 25 Participants.",
-                        "Coding Assessments.",
-                        "Live Coding Room.",
-                        "System Design Room.",
-                        "Data Collection Forms.",
-                        "Basic Candidate Reports.",
-                        "Question Library Access.",
-                        "Email support",
-                        ].map((feature) => (
-                        <div
-                            key={feature}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
-                            <Check size={15} className="text-blue-600" />
-                            </div>
-
-                            <span className="text-[15px] text-neutral-700">
+                    <div className="space-y-3.5 flex-1">
+                      {plan.features.map((feature) => (
+                        <div key={feature} className="flex items-center gap-2.5">
+                          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 shrink-0">
+                            <Check size={12} className="text-blue-600" />
+                          </div>
+                          <span className="text-[13px] text-neutral-700">
                             {feature}
-                            </span>
+                          </span>
                         </div>
-                        ))}
-
+                      ))}
                     </div>
 
-                    <p className="mt-8 text-center text-xs text-neutral-400">
-                        No hidden fees • Cancel anytime
+                    <p className="mt-6 text-center text-[11px] text-neutral-400">
+                      No hidden fees • Cancel anytime
                     </p>
-
-                    </div>
-                </div>
-            </div>
-
-
-             <div className="w-[33%] rounded-3xl border border-neutral-200 bg-linear-to-b from-neutral-50 via-white to-neutral-100 p-3 shadow-sm">
-                <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                    <StripedPattern color="#d4d4d4" width={6} height={6} />
-
-                    <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/15 blur-[90px]" />
-
-                    <div className="relative z-10 flex h-full flex-col p-8">
-
-                    {/* Badge */}
-                    <div className="flex justify-between items-center">
-                        <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wider text-blue-700">
-                        MOST POPULAR
-                        </span>
-
-                        <span className="text-sm font-medium text-neutral-500">
-                        Professional
-                        </span>
-                    </div>
-
-                    {/* Plan */}
-                    <div className="mt-8">
-                        <h2 className="text-4xl font-bold text-neutral-900">
-                            Pro
-                        </h2>
-
-                        <p className="mt-3 text-neutral-500 leading-7">
-                        Everything you need to automate technical evaluations and collaborate with your team.
-                        </p>
-                    </div>
-
-                    {/* Price */}
-                    <div className="mt-5 flex items-end gap-2">
-                        <h1 className="text-6xl font-black tracking-tight">
-                        ₹2499
-                        </h1>
-
-                        <span className="mb-2 text-neutral-500">
-                        /month
-                        </span>
-                    </div>
-
-                    <button className="mt-5 w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition hover:cursor-pointer hover:bg-blue-600">
-                        Choose Plan
-                    </button>
-
-                    <div className="my-3 h-px bg-neutral-200" />
-
-                    {/* Features */}
-
-                    <div className="space-y-5 flex-1">
-
-                        {[
-                            "25 active evaluation workflow.",
-                            "Up to 1000 Participants.",
-                            "Advanced AI evaluations.",
-                            "Advanced team management.",
-                            "SSO authentication.",
-                            "API & ATS integrations.",
-                            "Custom branding.",
-                            "Dedicated success manager.",
-                            "24/7 priority support.",
-                            ].map((feature) => (
-                        <div
-                            key={feature}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
-                            <Check size={15} className="text-blue-600" />
-                            </div>
-
-                            <span className="text-[15px] text-neutral-700">
-                            {feature}
-                            </span>
-                        </div>
-                        ))}
-
-                    </div>
-
-                    <p className="mt-8 text-center text-xs text-neutral-400">
-                        No hidden fees • Cancel anytime
-                    </p>
-
-                    </div>
-                </div>
-            </div>
-
-             <div className="w-[33%] rounded-3xl border border-neutral-200 bg-linear-to-b from-neutral-50 via-white to-neutral-100 p-3 shadow-sm">
-                
-                <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                    <StripedPattern color="#d4d4d4" width={6} height={6} />
-
-                    <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/15 blur-[90px]" />
-
-                    <div className="relative z-10 flex h-full flex-col p-8">
-
-                    {/* Badge */}
-                    <div className="flex justify-between items-center">
-                        <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wider text-blue-700">
-                        ENTERPRISE
-                        </span>
-
-                        <span className="text-sm font-medium text-neutral-500">
-                        Industry Grade
-                        </span>
-                    </div>
-
-                    {/* Plan */}
-                    <div className="mt-8">
-                        <h2 className="text-4xl font-bold text-neutral-900">
-                        Enterprise
-                        </h2>
-
-                        <p className="mt-3 text-neutral-500 leading-7">
-                            Everything you need to manage large-scale evaluations with enterprise-grade security.
-                        </p>
-                    </div>
-
-                    {/* Price */}
-                    <div className="mt-5 flex items-end gap-2">
-                        <h1 className="text-6xl font-black tracking-tight">
-                        ₹9999
-                        </h1>
-
-                        <span className="mb-2 text-neutral-500">
-                        /month
-                        </span>
-                    </div>
-
-                    <button className="mt-5 w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition hover:cursor-pointer hover:bg-blue-600">
-                        Contact Sales
-                    </button>
-
-                    <div className="my-3 h-px bg-neutral-200" />
-
-                    {/* Features */}
-
-                    <div className="space-y-5 flex-1">
-
-                        {[
-                            "Unlimited workflows.",
-                            "Unlimited participants.",
-                            "Unlimited AI evaluations.",
-                            "Advanced team management.",
-                            "Role-based access control.",
-                            "SSO authentication.",
-                            "API & ATS integrations.",
-                            "Custom branding.",
-                            "24/7 priority support.",
-                            ].map((feature) => (
-                        <div
-                            key={feature}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
-                            <Check size={15} className="text-blue-600" />
-                            </div>
-
-                            <span className="text-[15px] text-neutral-700">
-                            {feature}
-                            </span>
-                        </div>
-                        ))}
-
-                    </div>
-
-                    <p className="mt-8 text-center text-xs text-neutral-400">
-                        No hidden fees • Cancel anytime
-                    </p>
-
-                    </div>
-                </div>
-            </div>
-
-
-
-           
-
-
-
-          
-
-
-         </div>
-
-                <div className="font-normal text-[11px] text-gray-400 mt-10">
-            |⎯⎯⎯⎯⎯⎯⎯⎯ WE OFFER
-            ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-            TO YOU
-          </div>
-     
-
-              <div className="rounded-xl flex flex-row gap-10 h-[50%] border-2 mt-8 p-3">
-
-               
-
-                <div className="relative  transition-all ease-in-out hover:scale-[1.01] hover:cursor-pointer flex h-full  items-center justify-center overflow-hidden rounded-md border bg-white  shadow-sm">
-                  <StripedPattern width={6} height={6} color="#d4d4d4" />
-              
-                  <div className="z-10 p-3 w-full h-full">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10  items-center justify-center rounded-md bg-black ring-3 ring-gray-300">
-                        <ShieldCheck
-                          color="white"
-                          size={27}
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                      <p className="text-[18px] text-black">
-                        Transparent Pricing
-                      </p>
-                    </div>
-                    <div className=" mt-2  flex flex-col ">
-                      <p className="text-black/50 my-1">
-                       No hidden charges—just clear, predictable pricing for every plan.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-black text-[15px]">
-                          AI Description
-                        </span>
-                        <RainbowButton
-                          variant={"outline"}
-                          className="flex items-center gap-2 rounded-sm border-2  px-5 py-3 text-[15.5px] text-white transition-all bg-transparent duration-200 hover:scale-105 hover:bg-[#004ae0]"
-                        >
-                          <MoveRight className="h-4 w-4" color="black" />
-                        </RainbowButton>
-                      </div>
-                    </div>
                   </div>
-
-
                 </div>
-
-                <div className="relative  transition-all ease-in-out hover:scale-[1.01] hover:cursor-pointer flex h-full  items-center justify-center overflow-hidden rounded-md border bg-white  shadow-sm">
-                  <StripedPattern width={6} height={6} color="#d4d4d4" />
-              
-                  <div className="z-10 p-3 w-full h-full">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10  items-center justify-center rounded-md bg-black ring-3 ring-gray-300">
-                        <ShieldCheck
-                          color="white"
-                          size={27}
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                      <p className="text-[18px] text-black">
-                        Cancel Anytime
-                      </p>
-                    </div>
-                    <div className=" mt-2  flex flex-col ">
-                      <p className="text-black/50 my-1">
-                       Change or cancel your subscription whenever your needs evolve.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-black text-[15px]">
-                          AI Description
-                        </span>
-                        <RainbowButton
-                          variant={"outline"}
-                          className="flex items-center gap-2 rounded-sm border-2  px-5 py-3 text-[15.5px] text-white transition-all bg-transparent duration-200 hover:scale-105 hover:bg-[#004ae0]"
-                        >
-                          <MoveRight className="h-4 w-4" color="black" />
-                        </RainbowButton>
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-
-                <div className="relative  transition-all ease-in-out hover:scale-[1.01] hover:cursor-pointer flex h-full  items-center justify-center overflow-hidden rounded-md border bg-white  shadow-sm">
-                  <StripedPattern width={6} height={6} color="#d4d4d4" />
-              
-                  <div className="z-10 p-3 w-full h-full">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10  items-center justify-center rounded-md bg-black ring-3 ring-gray-300">
-                        <ShieldCheck
-                          color="white"
-                          size={27}
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                      <p className="text-[18px] text-black">
-                        Enterprise Security
-                      </p>
-                    </div>
-                    <div className=" mt-2  flex flex-col ">
-                      <p className="text-black/50 my-1">
-                       Your data is protected with trusted enterprise-grade security.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-black text-[15px]">
-                          AI Description
-                        </span>
-                        <RainbowButton
-                          variant={"outline"}
-                          className="flex items-center gap-2 rounded-sm border-2  px-5 py-3 text-[15.5px] text-white transition-all bg-transparent duration-200 hover:scale-105 hover:bg-[#004ae0]"
-                        >
-                          <MoveRight className="h-4 w-4" color="black" />
-                        </RainbowButton>
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
-
               </div>
+            ))}
+          </div>
 
-            </div>
+          {/* Divider */}
+          <div className="w-full flex items-center gap-3 mt-14 sm:mt-16 mb-8 overflow-hidden">
+            <div className="h-px flex-1 bg-gray-300" />
+            <span className="shrink-0 text-[12px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+              We Offer To You
+            </span>
+            <div className="h-px flex-1 bg-gray-300" />
+          </div>
 
-          <Footer/>
+          {/* Perks Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {perks.map((perk, i) => (
+              <div
+                key={i}
+                className="relative transition-all ease-in-out hover:scale-[1.01] hover:cursor-pointer flex items-center justify-center overflow-hidden rounded-xl border-2 bg-gray-50 p-2.5"
+              >
+                <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-md border bg-white shadow-sm">
+                  <StripedPattern width={6} height={6} color="#d4d4d4" />
+                  <div className="z-10 p-4 w-full h-full flex flex-col">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-md bg-black ring-1 ring-gray-200 shrink-0">
+                        <span className="text-white">{perk.icon}</span>
+                      </div>
+                      <p className="text-[14px] sm:text-[15px] text-black font-medium leading-snug">
+                        {perk.title}
+                      </p>
+                    </div>
+                    <div className="mt-2 flex flex-col flex-1 justify-between">
+                      <p className="text-black/50 text-[13px] leading-relaxed">
+                        {perk.desc}
+                      </p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-black text-[12px]">AI Description</span>
+                        <RainbowButton
+                          variant="outline"
+                          className="flex items-center gap-1.5 rounded-sm border-2 px-3 py-1.5 text-[12px] text-white transition-all bg-transparent duration-200 hover:scale-105 hover:bg-[#004ae0]"
+                        >
+                          <MoveRight className="h-3 w-3" color="black" />
+                        </RainbowButton>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-        
-      
+        </div>
+      </div>
+
+      <Footer />
     </>
   );
 }

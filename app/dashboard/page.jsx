@@ -1,278 +1,216 @@
-"use client"
+"use client";
+
 import {
   BadgeCheck,
-  Building2,
-  School,
-  ReceiptText,
   Bookmark,
-  Crown,
-  ClipboardList,
-  ArrowRight,
-  ArrowUpRight,
+  ReceiptText,
   BadgeDollarSign,
   ChartNoAxesColumn,
   Blocks,
-  CheckCheck,
-  CreditCard,
-  Briefcase,
-  ShieldCheck,
-  Brain,
-  LineStyle,
   Code2,
-  Sparkles,
-  GraduationCap,
-  ChevronDown,
-  Boxes,
-  FilePenLine,
   Workflow,
   Users,
-  UserPlus,
-  Shield,
-  Target,
-  KeyRound,
   Settings,
   History,
   LayoutTemplate,
-  Plus,
-  House,
-  Archive,
   Zap,
-  TextInitial,
-  MoveRight,
-  CornerDownRight,
+  House,
+  Menu,
+  X,
 } from "lucide-react";
-import { Suspense,lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
-import Image from "next/image";
-import { useState } from "react";
-import { StripedPattern } from "@/components/magicui/striped-pattern";
-import { Globe } from "@/components/ui/globe";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { NotebookText } from "lucide-react";
-import AssessmentStatusList from "@/components/AssessmentStatusList.jsx";
-const Overview = lazy(()=>import("./_components/Overview.jsx"));
-const RecentActivity = lazy(()=>import("./_components/RecentActivity.jsx"));
-const QuickActions = lazy(()=>import("./_components/QuickActions.jsx"));
-const Workflowx = lazy(()=>import("./_components/Workflow.jsx"));
-const Templates = lazy(()=>import("./_components/Templates.jsx"));
-const Published = lazy(()=>import("./_components/Published.jsx"));
-const Components = lazy(()=>import("./_components/Components.jsx"));
-const TeamManagement = lazy(()=>import("./_components/TeamManagement.jsx"));
-const SavedQuestions = lazy(()=>import("./_components/SavedQuestions.jsx"));
-const CodingChallenges = lazy(()=>import("./_components/CodingChallenges.jsx"));
-const Subscriptions = lazy(()=>import("./_components/Subscriptions.jsx"));
-const BillingHistory = lazy(()=>import("./_components/BillingHistory.jsx"));
-const Usage = lazy(()=>import("./_components/Usage.jsx"));
-const SettingsScreen = lazy(()=>import("./_components/Settings.jsx"));
+
+const Overview = lazy(() => import("./_components/Overview.jsx"));
+const RecentActivity = lazy(() => import("./_components/RecentActivity.jsx"));
+const QuickActions = lazy(() => import("./_components/QuickActions.jsx"));
+const Workflowx = lazy(() => import("./_components/Workflow.jsx"));
+const Templates = lazy(() => import("./_components/Templates.jsx"));
+const Published = lazy(() => import("./_components/Published.jsx"));
+const Components = lazy(() => import("./_components/Components.jsx"));
+const TeamManagement = lazy(() => import("./_components/TeamManagement.jsx"));
+const SavedQuestions = lazy(() => import("./_components/SavedQuestions.jsx"));
+const CodingChallenges = lazy(() => import("./_components/CodingChallenges.jsx"));
+const Subscriptions = lazy(() => import("./_components/Subscriptions.jsx"));
+const BillingHistory = lazy(() => import("./_components/BillingHistory.jsx"));
+const Usage = lazy(() => import("./_components/Usage.jsx"));
+const SettingsScreen = lazy(() => import("./_components/Settings.jsx"));
 import Loader from "./_components/Loading.jsx";
 
+const navSections = [
+  {
+    label: "Getting Started",
+    items: [
+      { key: "overview", label: "Overview", icon: House },
+      { key: "recent-activity", label: "Recent Activity", icon: History },
+      { key: "quick-actions", label: "Quick Actions", icon: Zap },
+    ],
+  },
+  {
+    label: "Manage",
+    items: [
+      { key: "workflow", label: "Workflow", icon: Workflow },
+      { key: "template", label: "Template", icon: LayoutTemplate },
+      { key: "published", label: "Published", icon: BadgeCheck },
+      { key: "components", label: "Components", icon: Blocks },
+      { key: "team-management", label: "Team Management", icon: Users },
+    ],
+  },
+  {
+    label: "Saved",
+    items: [
+      { key: "saved-questions", label: "Saved Questions", icon: Bookmark },
+      { key: "coding-challenges", label: "Coding Challenges", icon: Code2 },
+    ],
+  },
+  {
+    label: "Billing",
+    items: [
+      { key: "subscriptions", label: "Subscriptions", icon: BadgeDollarSign },
+      { key: "billing-history", label: "Billing History", icon: ReceiptText },
+      { key: "usage", label: "Usage", icon: ChartNoAxesColumn },
+    ],
+  },
+  {
+    label: "Settings",
+    items: [{ key: "settings", label: "Settings", icon: Settings }],
+  },
+];
+
+const viewMap = {
+  overview: Overview,
+  "recent-activity": RecentActivity,
+  "quick-actions": QuickActions,
+  workflow: Workflowx,
+  template: Templates,
+  published: Published,
+  components: Components,
+  "team-management": TeamManagement,
+  "saved-questions": SavedQuestions,
+  "coding-challenges": CodingChallenges,
+  subscriptions: Subscriptions,
+  "billing-history": BillingHistory,
+  usage: Usage,
+  settings: SettingsScreen,
+};
 
 export default function Dashboard() {
-  // overview
-  // recent-activity 
-  // quick-actions
-  // workflow
-  //template
-  //published
-  //components
-  // tmanagement
-  //saved-questions
-  //coding-challenges
-  //subscriptions
-  //billing-history
-  //usage
-  //settings
   const [visibleView, setVisibleView] = useState("overview");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const ActiveComponent = viewMap[visibleView];
+
+  return (
+    <div className="bg-[radial-gradient(ellipse_0%_0%_at_50%_30%,rgba(0,74,224,0.12),transparent_70%),radial-gradient(rgba(0,74,224,0.18)_1.2px,transparent_1px)] bg-[#fafafa] bg-size-[auto,22px_22px] h-screen flex flex-col overflow-hidden">
+      
+      {/* Header */}
+      <header className="px-4 sm:px-5 py-3 bg-white border-b flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="lg:hidden p-1.5 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+          >
+            <Menu size={18} />
+          </button>
+          <span className="text-[15px] border border-black px-1.5 py-0.5 rounded-sm font-semibold">
+            AX
+          </span>
+          <span className="hidden sm:inline text-gray-300">/</span>
+          <span className="hidden sm:inline text-[13px] text-gray-500">Organization</span>
+          <span className="hidden sm:inline text-gray-300">/</span>
+          <span className="text-[13px] font-medium text-[#1e1f24]">
+            {navSections
+              .flatMap((s) => s.items)
+              .find((i) => i.key === visibleView)?.label || "Overview"}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <RainbowButton size="sm" variant="outline">
+            <span className="sr-only">Menu</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+            </svg>
+          </RainbowButton>
+        </div>
+      </header>
+
+      <div className="flex flex-1 overflow-hidden">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex w-60 bg-[#fcfcfc] border-r flex-col overflow-y-auto py-3 px-2.5">
+          <SidebarContent visibleView={visibleView} onSelect={(key) => setVisibleView(key)} />
+        </aside>
+
+        {/* Mobile Sidebar Drawer */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-[100] lg:hidden">
+            <div
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              onClick={() => setSidebarOpen(false)}
+            />
+            <div className="absolute left-0 top-0 h-full w-60 bg-[#fcfcfc] border-r shadow-xl flex flex-col overflow-y-auto py-3 px-2.5">
+              <div className="flex items-center justify-between mb-4 px-1">
+                <span className="text-[15px] font-semibold">Menu</span>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-1.5 text-gray-500 hover:bg-gray-100 rounded-md transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <SidebarContent
+                visibleView={visibleView}
+                onSelect={(key) => {
+                  setVisibleView(key);
+                  setSidebarOpen(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Main Content */}
+        <main className="flex-1 min-w-0 overflow-y-auto p-4 sm:p-6">
+          <Suspense fallback={<Loader />}>
+            {ActiveComponent && <ActiveComponent />}
+          </Suspense>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+/* Sidebar Content Component */
+function SidebarContent({ visibleView, onSelect }) {
   return (
     <>
-      <div className="bg-[radial-gradient(ellipse_0%_0%_at_50%_30%,rgba(0,74,224,0.12),transparent_70%),radial-gradient(rgba(0,74,224,0.18)_1.2px,transparent_1px)]  bg-[#fafafa] bg-size-[auto,22px_22px] h-screen">
-        {/* Header */}
-        <div className="px-5 py-4 bg-white border-b h-[7%] flex items-center justify-between">
-          <div>
-            <span className="text-[16px] border-black px-2 py-1  rounded-sm font-semibold">
-              AX
-            </span>
-            &nbsp;&nbsp;&nbsp;{" "}
-            <span className="text-[16px] text-gray-300">/</span>
-            &nbsp;&nbsp;&nbsp;
-            <span>Organization</span> &nbsp;&nbsp;&nbsp;{" "}
-            <span className="text-[16px] text-gray-300">/</span>{" "}
-            &nbsp;&nbsp;&nbsp; <span className="">Overview</span>{" "}
-            &nbsp;&nbsp;&nbsp;
-          </div>
-        
-
-          <div className="flex items-center gap-3">
-             
-
-            <RainbowButton size="sm" variant="outline">
-              <LineStyle />
-            </RainbowButton>
-          </div>
+      {navSections.map((section) => (
+        <div key={section.label} className="mb-4">
+          <span className="text-[11px] uppercase tracking-wider text-gray-400 font-medium px-1.5 mb-1.5 block">
+            {section.label}
+          </span>
+          {section.items.map((item) => {
+            const isActive = visibleView === item.key;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.key}
+                onClick={() => onSelect(item.key)}
+                className={`w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-md text-[13px] transition-all ${
+                  isActive
+                    ? "bg-gray-200 text-black font-medium border-l-2 border-gray-800"
+                    : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                }`}
+              >
+                <Icon size={17} strokeWidth={2} />
+                {item.label}
+              </button>
+            );
+          })}
         </div>
-
-        <div className="flex h-[93%] ">
-          <div className="bg-[#fcfcfc] overflow-y-scroll scrollbar-thumb-accent  scrollbar-thin  border-r w-[15%] px-2.5 py-1.5 flex flex-col items-start">
-            <span className="text-[13px] my-2 ">Getting Started</span>
-
-            <button onClick={()=>setVisibleView("overview")} className={`text-[15.5px] ${visibleView == "overview"?"border-l-2":null} ${visibleView == "overview"?"text-black":"text-gray-500"} ${visibleView == "overview"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200 w-full text-black flex gap-1 items-center`}>
-              <House strokeWidth={2} size={20} />
-              Overview
-            </button>
-
-            <button onClick={()=>setVisibleView("recent-activity")} className={`text-[15.5px] ${visibleView == "recent-activity"?"border-l-2":null} ${visibleView == "recent-activity"?"text-black":"text-gray-500"} ${visibleView == "recent-activity"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1 hover:bg-gray-200  hover:cursor-pointer  w-full text-black flex gap-1 items-center`}>
-              <History strokeWidth={2} size={20} />
-              Recent Activity
-            </button>
-            <button onClick={()=>setVisibleView("quick-actions")} className={`text-[15.5px] ${visibleView == "quick-actions"?"border-l-2":null} ${visibleView == "quick-actions"?"text-black":"text-gray-500"} ${visibleView == "quick-actions"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1 hover:bg-gray-200  hover:cursor-pointer  w-full text-black flex gap-1 items-center`}>
-              <Zap strokeWidth={2} size={20} />
-              Quick Actions
-            </button>
-
-            <span className="text-[13px] mb-2 mt-5 ">Manage</span>
-
-            
-           
-              <button onClick={()=>setVisibleView("workflow")} className={`text-[15.5px] ${visibleView == "workflow"?"border-l-2":null} ${visibleView == "workflow"?"text-black":"text-gray-500"} ${visibleView == "workflow"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Workflow strokeWidth={2} size={20} />
-                Workflow
-              </button>     
-
-      
-              <button onClick={()=>setVisibleView("template")} className={`text-[15.5px] ${visibleView == "template"?"border-l-2":null} ${visibleView == "template"?"text-black":"text-gray-500"} ${visibleView == "template"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <LayoutTemplate strokeWidth={2} size={20} />
-                Template
-              </button>
-           
-      
-              <button onClick={()=>setVisibleView("published")} className={`text-[15.5px] ${visibleView == "published"?"border-l-2":null} ${visibleView == "published"?"text-black":"text-gray-500"} ${visibleView == "published"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <BadgeCheck strokeWidth={2} size={20} />
-                Published
-              </button>
-        
-
-          
-              <button onClick={()=>setVisibleView("components")} className={`text-[15.5px] ${visibleView == "components"?"border-l-2":null} ${visibleView == "components"?"text-black":"text-gray-500"} ${visibleView == "components"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Blocks strokeWidth={2} size={20} />
-                Components
-              </button>
-          
-
-         
-              <button onClick={()=>setVisibleView("team-management")} className={`text-[15.5px] ${visibleView == "team-management"?"border-l-2":null} ${visibleView == "team-management"?"text-black":"text-gray-500"} ${visibleView == "team-management"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Users strokeWidth={2} size={20} />
-                Team Management
-              </button>
-
-             
-
-            <span className="text-[13px] mb-2 mt-5 ">Saved</span>
-
-           
-              <button onClick={()=>setVisibleView("saved-questions")} className={`text-[15.5px] ${visibleView == "saved-questions"?"border-l-2":null} ${visibleView == "saved-questions"?"text-black":"text-gray-500"} ${visibleView == "saved-questions"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Bookmark strokeWidth={2} size={20} />
-                Saved Questions
-              </button>
-            
-
-       
-              <button onClick={()=>setVisibleView("coding-challenges")} className={`text-[15.5px] ${visibleView == "coding-challenges"?"border-l-2":null} ${visibleView == "coding-challenges"?"text-black":"text-gray-500"} ${visibleView == "coding-challenges"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Code2 strokeWidth={2} size={20} />
-                Coding Challenges
-              </button>
-           
-
-            <span className="text-[13px] mb-2 mt-5 ">Billing</span>
-
-      
-              <button onClick={()=>setVisibleView("subscriptions")} className={`text-[15.5px] ${visibleView == "subscriptions"?"border-l-2":null} ${visibleView == "subscriptions"?"text-black":"text-gray-500"} ${visibleView == "subscriptions"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <BadgeDollarSign strokeWidth={2} size={20} />
-                Subscriptions
-              </button>
-        
-
-        
-              <button onClick={()=>setVisibleView("billing-history")} className={`text-[15.5px] ${visibleView == "billing-history"?"border-l-2":null} ${visibleView == "billing-history"?"text-black":"text-gray-500"} ${visibleView == "billing-history"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <ReceiptText strokeWidth={2} size={20} />
-                Billing History
-              </button>
-            
-
-           
-              <button onClick={()=>setVisibleView("usage")} className={`text-[15.5px] ${visibleView == "usage"?"border-l-2":null} ${visibleView == "usage"?"text-black":"text-gray-500"} ${visibleView == "usage"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <ChartNoAxesColumn strokeWidth={2} size={20} />
-                Usage
-              </button>
-         
-
-            <span className="text-[13px] mb-2 mt-5 ">Settings</span>
-
-        
-              <button onClick={()=>setVisibleView("settings")} className={`text-[15.5px] ${visibleView == "settings"?"border-l-2":null} ${visibleView == "settings"?"text-black":"text-gray-500"} ${visibleView == "settings"?"bg-gray-200":null} border-[gray] rounded px-1.5 text-left py-1.5 mb-1  hover:cursor-pointer hover:bg-gray-200  w-full text-black flex gap-1 items-center`}>
-                <Settings strokeWidth={2} size={20} />
-                Settings
-              </button>
-      
-          </div>
-
-          {
-            visibleView == "overview"?<Suspense fallback={<Loader/>}><Overview/></Suspense>:null
-          }
-
-          {
-            visibleView == "recent-activity"?<Suspense fallback={<Loader/>}><RecentActivity/></Suspense>:null
-          }
-
-          {
-            visibleView == "quick-actions"?<Suspense fallback={<Loader/>}><QuickActions/></Suspense>:null
-          }
-
-          {
-            visibleView == "workflow"?<Suspense fallback={<Loader/>}><Workflowx/></Suspense>:null
-          }
-
-          {
-            visibleView == "template"?<Suspense fallback={<Loader/>}><Templates/></Suspense>:null
-          }
-
-          {
-            visibleView == "published"?<Suspense fallback={<Loader/>}><Published/></Suspense>:null
-          }
-
-          {
-            visibleView == "team-management"?<Suspense fallback={<Loader/>}><TeamManagement/></Suspense>:null
-          }
-
-          {
-            visibleView == "components"?<Suspense fallback={<Loader/>}><Components/></Suspense>:null
-          }
-
-          {
-            visibleView == "saved-questions"?<Suspense fallback={<Loader/>}><SavedQuestions/></Suspense>:null
-          }
-
-          {
-            visibleView == "coding-challenges"?<Suspense fallback={<Loader/>}><CodingChallenges/></Suspense>:null
-          }
-
-          {
-            visibleView == "subscriptions"?<Suspense fallback={<Loader/>}><Subscriptions/></Suspense>:null
-          }
-
-          {
-            visibleView == "billing-history"?<Suspense fallback={<Loader/>}><BillingHistory/></Suspense>:null
-          }
-
-          {
-            visibleView == "usage"?<Suspense fallback={<Loader/>}><Usage/></Suspense>:null
-          }
-
-          {
-            visibleView == "settings"?<Suspense fallback={<Loader/>}><SettingsScreen/></Suspense>:null
-          }
-
-        </div>
-      </div>
+      ))}
     </>
   );
 }

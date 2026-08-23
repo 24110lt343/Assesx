@@ -84,15 +84,42 @@ while (true) {
 }
 
 
-function normalizeOutput(output) {
-  return output
-    .replace(/\u0000/g, " ")
-    .replace(/\r\n/g, "\n")
-    .trim();
-}
-
-console.log(normalizeOutput("AKASH\u0000MISHRA\n"));
-
 // https://onecompiler.com/api/console/stdin
 // Method : post
 // Payload : "workerId":"wi-40ae57f3-5fd6-429b-a587-4401b45164e0","jobId":"44x23wmyu_44x2fevua","data":"1000\n"}
+
+
+
+// Java/C++/Python/Javascript : https://onecompiler.com/api/console/run ::POST
+// Payload : {
+//             name: "Main.java",
+//             content: `import java.util.*;
+
+// public class Main {
+//     public static void main(String[] args) {    
+//             Scanner sc = new Scanner(System.in);
+//             String name = sc.nextLine();
+//             System.out.println(name);
+//     }
+// }`
+//         }]
+//     }
+
+
+// Go :
+// Payload : {"language":"go","files":[{"name":"main.go","content":"package main\nimport \"fmt\"\n\nfunc main() {\n\tfmt.Printf(\"Hello, World!\")\n}"}],"stdin":""}
+
+
+
+// File Names
+//python : main.py
+// java :Main.java
+// cpp : Main.cpp
+// javascript : index.js
+
+// Time matrix
+// Java --------> 2s Approx
+// C++ ---------> 1.5s Approx
+// Python ------> 1s  Approx
+// Javascript --> 0.8s Approx
+// GoLang ------> 1.5s Approx
