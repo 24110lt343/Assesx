@@ -23,10 +23,10 @@ export default function QuickActions() {
           </span>
         </div>
         <h2 className="mt-2 text-xl sm:text-2xl font-semibold tracking-tight text-gray-900">
-          Quick Actions
+          Overview
         </h2>
         <p className="mt-2 text-[13px] sm:text-sm text-gray-500 leading-relaxed max-w-2xl">
-          Perform common tasks faster with shortcuts to create assessments, manage members, and organize your hiring workflows from one place.
+          Get a real-time pulse on your organization — track active assessments, candidate progress, and team performance from a single glance.
         </p>
 
         {/* Cards Grid */}
